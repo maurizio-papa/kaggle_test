@@ -64,7 +64,7 @@ def make_optimizer(model, optimizer_config):
     decay = set()
     no_decay = set()
     whitelist_weight_modules = (torch.nn.Linear, torch.nn.Conv1d, MaskedConv1D)
-    blacklist_weight_modules = (LayerNorm, torch.nn.GroupNorm)
+    blacklist_weight_modules = (LayerNorm, torch.nn.GroupNorm, torch.nn.LayerNorm)
 
     # loop over all modules / params
     for mn, m in model.named_modules():
@@ -85,6 +85,9 @@ def make_optimizer(model, optimizer_config):
             elif pn.endswith('rel_pe'):
                 # corner case for relative position encoding
                 no_decay.add(fpn)
+            elif pn.endswith('A_log') or pn.endswith("D_b") or pn.endswith("D") or pn.endswith("A_b_log") or pn.endswith("forward_embed") or pn.endswith("backward_embed"):
+                # corner case for mamba
+                decay.add(fpn)
 
     # validate that we considered every parameter
     param_dict = {pn: p for pn, p in model.named_parameters()}
