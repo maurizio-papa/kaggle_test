@@ -2,8 +2,8 @@ dataset_name: epic
 train_split: ['training']
 val_split: ['validation']
 dataset: {
-  json_file: /kaggle/videos_2/epic_kitchens/annotations/epic_kitchens_100_verb.json,
-  feat_folder: /kaggle/videos_2/epic_kitchens/features//kaggle/videos_2/videomae-large_ft_verb_16x4x1_img224_stride8_len16_interval1_epic_verb,
+  json_file: /kaggle/working/mamba/epic_kitchens_100_verb.json,
+  feat_folder: /kaggle/videos_2/videomae-large_ft_verb_16x4x1_img224_stride8_len16_interval1_epic_verb,
   file_prefix: ~,
   file_ext: .npy,
   num_classes: 97,
